@@ -183,6 +183,65 @@ public class LinkedList {
 	{
 		System.out.println("Length : "+length);
 	}
+	//additional methods
+	 public void removeDuplicates()
+    {
+        if(head==null)return;
+        HashSet<Integer> unique=new HashSet<>();
+        Node temp=head.next;
+        Node prev=head;
+        unique.add(head.value);
+        while(temp!=null)
+        {
+            if(!unique.contains(temp.value))
+            {
+                unique.add(temp.value);
+                prev=prev.next;
+            }
+            else
+            {
+                prev.next=temp.next;
+                temp.next=null;
+                temp=prev;
+                length--;
+            }
+            temp=temp.next;
+        }
+    }
+	 public int binaryToDecimal()
+    {
+        int num=0;
+        Node temp=head;
+        int i=length-1;
+        while(temp!=null)
+        {
+            num+=temp.value*Math.pow(2,i);
+            i--;
+            temp=temp.next;
+        }
+        return num;
+    }
+ public void reverseBetween(int m,int n)
+   {
+       if(head==null)return;
+       Node dummy=new Node(0);
+       dummy.next=head;
+       Node prev=dummy;
+       for(int i=0;i<m;i++)
+       {
+           prev=prev.next;
+       }
+       Node current=prev.next;
+       for(int i=0;i<n-m;i++)
+       {
+       Node moveTo=current.next;
+       current.next=moveTo.next;
+       moveTo.next=prev.next;
+       prev.next=moveTo;
+       
+       }
+       head=dummy.next;
+   }
 	
 	 
 }
